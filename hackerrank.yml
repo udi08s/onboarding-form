@@ -1,0 +1,343 @@
+
+version: '2.0'
+
+problem:
+  title: "QA Assignment: Onboarding Form Testing with Playwright"
+  description: "Write comprehensive end-to-end tests for an onboarding form component using Playwright. The form includes personal information fields with validation rules and Australian-specific requirements."
+  difficulty: "Medium"
+  time_limit: 180  # 3 hours in minutes
+  
+environment:
+  runtime: "node18"
+  package_manager: "npm"
+  
+files:
+  readonly:
+    - "package.json"
+    - "playwright.config.js"
+    - "app/"
+    - "components/"
+    - "public/"
+    - "README.md"
+    - "next.config.mjs"
+    - ".next/"
+    - "tsconfig.json"
+    - "postcss.config.mjs"
+    - "components.json"
+  
+  editable:
+    - "tests/onboarding-form.spec.js"
+  
+  hidden:
+    - "node_modules/"
+    - ".git/"
+    - "test-results/"
+    - "playwright-report/"
+
+setup:
+  commands:
+    - "npm install"
+    - "npm run build"
+    
+test_setup:
+  pre_test:
+    - "npm run dev &"
+    - "sleep 10"  # Wait for dev server to start
+    - "npx playwright install"
+  
+  post_test:
+    - "pkill -f 'npm run dev'"
+
+scoring:
+  type: "custom"
+  total_points: 100
+  
+  test_cases:
+    # Form Visibility and Initial State (15 points)
+    - name: "Form Visibility Tests"
+      points: 8
+      command: "npx playwright test --grep 'should display all form fields'"
+      timeout: 30
+      
+    - name: "Initial State Tests"
+      points: 7
+      command: "npx playwright test --grep 'should have correct initial state'"
+      timeout: 30
+    
+    # Field Validation Tests (35 points)
+    - name: "Name Fields Validation"
+      points: 8
+      command: "npx playwright test --grep 'should validate name fields'"
+      timeout: 45
+      
+    - name: "Email Validation"
+      points: 8
+      command: "npx playwright test --grep 'should validate email field'"
+      timeout: 45
+      
+    - name: "Phone Validation"
+      points: 8
+      command: "npx playwright test --grep 'should validate phone field'"
+      timeout: 45
+      
+    - name: "Date of Birth Validation"
+      points: 6
+      command: "npx playwright test --grep 'should validate date of birth'"
+      timeout: 45
+      
+    - name: "Company Field Validation"
+      points: 5
+      command: "npx playwright test --grep 'should validate company field'"
+      timeout: 30
+    
+    # Dropdown Field Tests (20 points)
+    - name: "State Dropdown Tests"
+      points: 10
+      command: "npx playwright test --grep 'should test state dropdown'"
+      timeout: 45
+      
+    - name: "Gender Dropdown Tests"
+      points: 10
+      command: "npx playwright test --grep 'should test gender dropdown'"
+      timeout: 45
+    
+    # Form Submission Tests (20 points)
+    - name: "Valid Form Submission"
+      points: 10
+      command: "npx playwright test --grep 'should submit valid form successfully'"
+      timeout: 60
+      
+    - name: "Invalid Form Submission"
+      points: 5
+      command: "npx playwright test --grep 'should prevent invalid form submission'"
+      timeout: 45
+      
+    - name: "Loading and Success States"
+      points: 5
+      command: "npx playwright test --grep 'should show loading and success states'"
+      timeout: 60
+    
+    # User Experience Tests (10 points)
+    - name: "Real-time Error Clearing"
+      points: 5
+      command: "npx playwright test --grep 'should clear errors when typing'"
+      timeout: 45
+      
+    - name: "Error Display and Styling"
+      points: 5
+      command: "npx playwright test --grep 'should display errors correctly'"
+      timeout: 45
+
+ide:
+  layout:
+    - type: "editor"
+      files: 
+        - "tests/onboarding-form.spec.js"
+      default_file: "tests/onboarding-form.spec.js"
+      width: 70
+      
+    - type: "preview"
+      url: "http://localhost:3000"
+      width: 30
+      refresh_on_save: false
+      
+  editor_config:
+    language: "javascript"
+    theme: "vs-dark"
+    font_size: 14
+    tab_size: 2
+    word_wrap: true
+    minimap: false
+    
+starter_code: |
+  import { test, expect } from '@playwright/test'
+
+  test.describe('Onboarding Form Tests', () => {
+    test.beforeEach(async ({ page }) => {
+      await page.goto('/')
+    })
+
+    test.describe('Form Visibility and Initial State', () => {
+      test('should display all form fields', async ({ page }) => {
+        // TODO: Test that all form fields are visible
+        // Required fields: First Name, Last Name, Email, Phone, Date of Birth, State, Gender
+        // Optional field: Company
+        // Button: Complete Profile
+      })
+      
+      test('should have correct initial state', async ({ page }) => {
+        // TODO: Test initial form state
+        // - All fields should be empty
+        // - Submit button should be enabled
+        // - No error messages should be visible
+      })
+    })
+
+    test.describe('Field Validation Tests', () => {
+      test('should validate name fields', async ({ page }) => {
+        // TODO: Test first name and last name validation
+        // Test cases: 
+        // - Empty fields (required)
+        // - Less than 2 characters (minimum length)
+        // - Valid names (2+ characters)
+      })
+      
+      test('should validate email field', async ({ page }) => {
+        // TODO: Test email validation
+        // Test cases: 
+        // - Empty field (required)
+        // - Invalid formats (missing @, missing domain, etc.)
+        // - Valid email format
+      })
+      
+      test('should validate phone field', async ({ page }) => {
+        // TODO: Test phone number validation
+        // Test cases: 
+        // - Empty field (required)
+        // - Invalid formats (non-Australian numbers)
+        // - Valid Australian formats: +61 4XX XXX XXX or 04XX XXX XXX
+      })
+      
+      test('should validate date of birth', async ({ page }) => {
+        // TODO: Test date of birth validation
+        // Test cases: 
+        // - Empty field (required)
+        // - Future date (invalid)
+        // - Under 13 years old (invalid)
+        // - Over 120 years old (invalid)
+        // - Valid date (13-120 years old)
+      })
+      
+      test('should validate company field', async ({ page }) => {
+        // TODO: Test company field validation (optional field)
+        // Test cases: 
+        // - Empty field (valid - optional)
+        // - Less than 2 characters (invalid if provided)
+        // - Valid company name (2+ characters)
+      })
+    })
+
+    test.describe('Dropdown Field Tests', () => {
+      test('should test state dropdown', async ({ page }) => {
+        // TODO: Test state dropdown functionality
+        // Test cases: 
+        // - All 8 Australian states/territories available
+        // - Selection works correctly
+        // - Validation when no state selected
+        // - Error styling when validation fails
+      })
+      
+      test('should test gender dropdown', async ({ page }) => {
+        // TODO: Test gender dropdown functionality
+        // Test cases: 
+        // - All 5 gender options available
+        // - Selection works correctly
+        // - Validation when no gender selected
+        // - Error styling when validation fails
+      })
+    })
+
+    test.describe('Form Submission Tests', () => {
+      test('should submit valid form successfully', async ({ page }) => {
+        // TODO: Test successful form submission
+        // - Fill all required fields with valid data
+        // - Submit form
+        // - Verify success state with checkmark icon
+        // - Verify success message
+      })
+      
+      test('should prevent invalid form submission', async ({ page }) => {
+        // TODO: Test that invalid forms cannot be submitted
+        // - Leave required fields empty or invalid
+        // - Attempt submission
+        // - Verify form doesn't submit
+        // - Verify error messages are displayed
+      })
+      
+      test('should show loading and success states', async ({ page }) => {
+        // TODO: Test loading state during submission and success state after
+        // - Submit valid form
+        // - Verify button shows "Creating Profile..." and is disabled
+        // - Wait for submission to complete
+        // - Verify success state with welcome message
+      })
+    })
+
+    test.describe('User Experience Tests', () => {
+      test('should clear errors when typing', async ({ page }) => {
+        // TODO: Test that error messages disappear when user starts typing
+        // - Trigger validation error
+        // - Start typing in the field
+        // - Verify error message disappears
+      })
+      
+      test('should display errors correctly', async ({ page }) => {
+        // TODO: Test error message display and styling
+        // - Trigger validation errors
+        // - Verify error messages are visible
+        // - Verify error styling (border-destructive class)
+      })
+    })
+  })
+
+  // Helper functions you can use:
+  
+  async function fillFormField(page, label, value) {
+    await page.fill(`[aria-label="${label}"]`, value)
+  }
+
+  async function selectDropdownOption(page, label, option) {
+    await page.click(`[aria-label="${label}"]`)
+    await page.click(`text=${option}`)
+  }
+
+  async function submitForm(page) {
+    await page.click('button[type="submit"]')
+  }
+
+  async function expectErrorMessage(page, message) {
+    await expect(page.locator(`text=${message}`)).toBeVisible()
+  }
+
+grading:
+  auto_grading: true
+  manual_review: false
+  
+  scoring_criteria:
+    - name: "Test Completeness"
+      weight: 30
+      description: "Coverage of all specified test scenarios"
+      
+    - name: "Test Quality"
+      weight: 25
+      description: "Well-structured, readable, and maintainable tests"
+      
+    - name: "Assertion Accuracy"
+      weight: 20
+      description: "Proper use of Playwright assertions and selectors"
+      
+    - name: "Edge Case Coverage"
+      weight: 15
+      description: "Testing boundary conditions and error states"
+      
+    - name: "Code Organization"
+      weight: 10
+      description: "Logical grouping and clear test descriptions"
+
+constraints:
+  memory_limit: "2GB"
+  execution_time_limit: 300  # 5 minutes per test case
+  
+sample_solution:
+  file: "tests/solutions/onboarding-form.solution.spec.js"
+  hidden: true
+
+hints:
+  - "Use aria-label selectors for reliable element selection (e.g., 'First Name *', 'Email Address *')"
+  - "Test both positive and negative scenarios for each validation rule"
+  - "Don't forget to test dropdown selections and form submission states"
+  - "Consider real user workflows when writing your tests"
+  - "Use beforeEach hooks to set up common test preconditions"
+  - "The form has specific Australian phone number validation rules"
+  - "Date of birth has age restrictions (13-120 years old)"
+  - "Company field is optional but has minimum length validation when provided"
