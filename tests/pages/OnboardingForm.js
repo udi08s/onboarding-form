@@ -29,8 +29,11 @@ export class OnboardingFormPage {
 
     // Error message locators
     this.firstNameRequiredError = page.getByText('First name is required');
+    this.firstNameMinLengthError = page.getByText('First name must be at least 2 characters');
     this.lastNameRequiredError = page.getByText('Last name is required');
+    this.lastNameMinLengthError = page.getByText('Last name must be at least 2 characters');
     this.emailRequiredError = page.getByText('Email is required');
+    this.emailFormatError = page.getByText('Please enter a valid email address');
     this.phoneRequiredError = page.getByText('Phone number is required');
     this.dateOfBirthRequiredError = page.getByText('Date of birth is required');
     this.stateRequiredError = page.getByText('Please select your state');
@@ -97,5 +100,17 @@ export class OnboardingFormPage {
     await expect(this.dateOfBirthRequiredError).toBeVisible();
     await expect(this.stateRequiredError).toBeVisible();
     await expect(this.genderRequiredError).toBeVisible();
+  }
+
+  async expectFirstNameMinLengthError() {
+    await expect(this.firstNameMinLengthError).toBeVisible();
+  }
+
+  async expectLastNameMinLengthError() {
+    await expect(this.lastNameMinLengthError).toBeVisible();
+  }
+
+  async expectEmailFormatError() {
+    await expect(this.emailFormatError).toBeVisible();
   }
 }

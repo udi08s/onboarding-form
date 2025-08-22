@@ -50,5 +50,32 @@
     "dateOfBirth": "",
     "state": "Victoria",
     "gender": "Male"
+  },
+  "singleCharacterFirstName": {
+    "firstName": "A",
+    "lastName": "Doe",
+    "email": "john.doe@mail.com",
+    "phone": "+61412345678",
+    "dateOfBirth": "1990-01-15",
+    "state": "Victoria",
+    "gender": "Male"
+  },
+  "singleCharacterLastName": {
+    "firstName": "John",
+    "lastName": "B",
+    "email": "john.doe@mail.com",
+    "phone": "+61412345678",
+    "dateOfBirth": "1990-01-15",
+    "state": "Victoria",
+    "gender": "Male"
+  },
+  "invalidEmailNoDot": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "user@domain",
+    "phone": "+61412345678",
+    "dateOfBirth": "1990-01-15",
+    "state": "Victoria",
+    "gender": "Male"
   }
 }

@@ -1,4 +1,4 @@
-import { test } from "@playwright/test"
+import { test  } from "@playwright/test"
 import { OnboardingFormPage } from './pages/OnboardingForm.js'
 import testData from './data/testData.json'
 import negativeTestData from './data/negativeTestData.json'
@@ -141,6 +141,43 @@ test.describe("Onboarding Form", () => {
         // Submit form and verify date of birth error
         await onboardingForm.submitForm()
         await onboardingForm.expectFieldError('dateOfBirth')
+      })
+    })
+
+    test.describe("First Name & Last Name Minimum Validation", () => {
+      test('should show minimum character error for single character first name', async ({ page }) => {
+        // Fill form with single character first name
+        await onboardingForm.fillPersonalInfo(negativeTestData.singleCharacterFirstName)
+        await onboardingForm.selectState(negativeTestData.singleCharacterFirstName.state)
+        await onboardingForm.selectGender(negativeTestData.singleCharacterFirstName.gender)
+        
+        // Submit form and verify minimum character error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectFirstNameMinLengthError()
+      })
+
+      test('should show minimum character error for single character last name', async ({ page }) => {
+        // Fill form with single character last name
+        await onboardingForm.fillPersonalInfo(negativeTestData.singleCharacterLastName)
+        await onboardingForm.selectState(negativeTestData.singleCharacterLastName.state)
+        await onboardingForm.selectGender(negativeTestData.singleCharacterLastName.gender)
+        
+        // Submit form and verify minimum character error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectLastNameMinLengthError()
+      })
+    })
+
+    test.describe("Email Validation", () => {
+      test('should show format error for email without dot in domain', async ({ page }) => {
+        // Fill form with invalid email format (no dot in domain)
+        await onboardingForm.fillPersonalInfo(negativeTestData.invalidEmailNoDot)
+        await onboardingForm.selectState(negativeTestData.invalidEmailNoDot.state)
+        await onboardingForm.selectGender(negativeTestData.invalidEmailNoDot.gender)
+        
+        // Submit form and verify email format error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectEmailFormatError()
       })
     })
   })
