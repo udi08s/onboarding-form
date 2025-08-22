@@ -24,8 +24,9 @@ export class OnboardingFormPage {
     this.successMessage = page.getByText('Your profile has been created successfully. You can now start using the platform.');
 
     // Label locators for visibility checks
-    this.stateLabel = page.getByText('State *', { exact: true });
-    this.genderLabel = page.getByText('Gender *', { exact: true });
+    this.stateLabel = page.getByText('State *');
+    this.genderLabel = page.getByText('Gender *');
+    this.firstNameLabel = page.getByText('First Name *');
 
     // Error message locators
     this.firstNameRequiredError = page.getByText('First name is required');
@@ -133,4 +134,5 @@ export class OnboardingFormPage {
   async expectDateOfBirthTooOldError() {
     await expect(this.dateOfBirthTooOldError).toBeVisible();
   }
+
 }

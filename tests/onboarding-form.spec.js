@@ -76,6 +76,26 @@ test.describe("Onboarding Form", () => {
         await onboardingForm.expectSuccessMessage()
       })
     })
+
+    test.describe("Dropdown Options Validation", () => {
+      const states = testData.dropdownOptions.states
+
+      states.forEach((state) => {
+        test(`should be able to select state: ${state}`, async ({ page }) => {
+          // Select each state option and verify it works
+          await onboardingForm.selectState(state)
+        })
+      })
+
+      const genders = testData.dropdownOptions.genders
+
+      genders.forEach((gender) => {
+        test(`should be able to select gender: ${gender}`, async ({ page }) => {
+          // Select each gender option and verify it works  
+          await onboardingForm.selectGender(gender)
+        })
+      })
+    })
   })
 
   test.describe("Negative Scenarios", () => {

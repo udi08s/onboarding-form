@@ -37,5 +37,24 @@
     "company": "Tech Solutions Ltd",
     "state": "New South Wales",
     "gender": "Female"
+  },
+  "dropdownOptions": {
+    "states": [
+      "New South Wales",
+      "Victoria", 
+      "Queensland",
+      "Western Australia",
+      "South Australia",
+      "Tasmania",
+      "Australian Capital Territory",
+      "Northern Territory"
+    ],
+    "genders": [
+      "Male",
+      "Female",
+      "Non-binary",
+      "Prefer not to say",
+      "Other"
+    ]
   }
 }
