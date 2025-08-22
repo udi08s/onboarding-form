@@ -21,8 +21,8 @@ test.describe("Onboarding Form", () => {
       await onboardingForm.fillPersonalInfo(testData.validFormData)
 
       // Select dropdown options
-      await onboardingForm.selectState('Victoria')
-      await onboardingForm.selectGender('Male')
+      await onboardingForm.selectState(testData.validFormData.state)
+      await onboardingForm.selectGender(testData.validFormData.gender)
 
       // Submit form and verify success
       await onboardingForm.submitForm()
@@ -31,14 +31,14 @@ test.describe("Onboarding Form", () => {
 
     test('should submit form successfully including optional company field', async ({ page }) => {
       // Fill personal information (required fields)
-      await onboardingForm.fillPersonalInfo(testData.validFormData)
+      await onboardingForm.fillPersonalInfo(testData.validFormDataWithCompany)
 
       // Fill optional company field
-      await onboardingForm.fillCompany(testData.validFormData.company)
+      await onboardingForm.fillCompany(testData.validFormDataWithCompany.company)
 
       // Select dropdown options
-      await onboardingForm.selectState('New South Wales')
-      await onboardingForm.selectGender('Female')
+      await onboardingForm.selectState(testData.validFormDataWithCompany.state)
+      await onboardingForm.selectGender(testData.validFormDataWithCompany.gender)
 
       // Submit form and verify success
       await onboardingForm.submitForm()
@@ -51,8 +51,8 @@ test.describe("Onboarding Form", () => {
         await onboardingForm.fillPersonalInfo(testData.boundaryFormDataMinimum)
         
         // Select dropdown options
-        await onboardingForm.selectState('Tasmania')
-        await onboardingForm.selectGender('Other')
+        await onboardingForm.selectState(testData.boundaryFormDataMinimum.state)
+        await onboardingForm.selectGender(testData.boundaryFormDataMinimum.gender)
         
         // Submit form and verify success without errors
         await onboardingForm.submitForm()
@@ -67,8 +67,8 @@ test.describe("Onboarding Form", () => {
         await onboardingForm.fillCompany(testData.boundaryFormDataMaximum.company)
         
         // Select dropdown options
-        await onboardingForm.selectState('Queensland')
-        await onboardingForm.selectGender('Prefer not to say')
+        await onboardingForm.selectState(testData.boundaryFormDataMaximum.state)
+        await onboardingForm.selectGender(testData.boundaryFormDataMaximum.gender)
         
         // Submit form and verify success without errors
         await onboardingForm.submitForm()

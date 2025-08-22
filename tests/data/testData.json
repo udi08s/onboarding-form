@@ -5,14 +5,18 @@
     "email": "john.doe@mail.com",
     "phone": "+61412345678",
     "dateOfBirth": "1990-01-15",
-    "company": "Acme Corp"
+    "company": "Acme Corp",
+    "state": "Victoria",
+    "gender": "Male"
   },
   "boundaryFormDataMinimum": {
     "firstName": "Jo",
     "lastName": "Li",
     "email": "a@b.co",
     "phone": "+61412345678",
-    "dateOfBirth": "2011-01-01"
+    "dateOfBirth": "2011-01-01",
+    "state": "Tasmania",
+    "gender": "Other"
   },
   "boundaryFormDataMaximum": {
     "firstName": "AbcdefghijklmnopqrstuvwxyzAbcd",
@@ -20,6 +24,18 @@
     "email": "very.long.email.address@example.com",
     "phone": "+61412345678",
     "dateOfBirth": "1905-01-01",
-    "company": "Very Long Company Name Limited"
+    "company": "Very Long Company Name Limited",
+    "state": "Queensland",
+    "gender": "Prefer not to say"
+  },
+  "validFormDataWithCompany": {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "email": "jane.smith@mail.com",
+    "phone": "+61412345679",
+    "dateOfBirth": "1985-03-20",
+    "company": "Tech Solutions Ltd",
+    "state": "New South Wales",
+    "gender": "Female"
   }
 }
