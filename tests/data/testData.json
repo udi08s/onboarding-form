@@ -1,0 +1,25 @@
+{
+  "validFormData": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@mail.com",
+    "phone": "+61412345678",
+    "dateOfBirth": "1990-01-15",
+    "company": "Acme Corp"
+  },
+  "boundaryFormDataMinimum": {
+    "firstName": "Jo",
+    "lastName": "Li",
+    "email": "a@b.co",
+    "phone": "+61412345678",
+    "dateOfBirth": "2011-01-01"
+  },
+  "boundaryFormDataMaximum": {
+    "firstName": "AbcdefghijklmnopqrstuvwxyzAbcd",
+    "lastName": "XyzabcdefghijklmnopqrstuvwxYz",
+    "email": "very.long.email.address@example.com",
+    "phone": "+61412345678",
+    "dateOfBirth": "1905-01-01",
+    "company": "Very Long Company Name Limited"
+  }
+}
