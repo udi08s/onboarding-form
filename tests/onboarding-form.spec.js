@@ -253,6 +253,20 @@ test.describe("Onboarding Form", () => {
         await onboardingForm.expectDateOfBirthTooOldError()
       })
     })
+
+    test.describe("Company Field Validation", () => {
+      test('should show minimum character error for single character company name', async ({ page }) => {
+        // Fill form with single character company name
+        await onboardingForm.fillPersonalInfo(negativeTestData.singleCharacterCompany)
+        await onboardingForm.fillCompany(negativeTestData.singleCharacterCompany.company)
+        await onboardingForm.selectState(negativeTestData.singleCharacterCompany.state)
+        await onboardingForm.selectGender(negativeTestData.singleCharacterCompany.gender)
+        
+        // Submit form and verify company minimum character error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectCompanyMinLengthError()
+      })
+    })
   })
 })
 

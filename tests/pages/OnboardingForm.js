@@ -43,6 +43,7 @@ export class OnboardingFormPage {
     this.dateOfBirthTooOldError = page.getByText('Please enter a valid date of birth');
     this.stateRequiredError = page.getByText('Please select your state');
     this.genderRequiredError = page.getByText('Please select your gender');
+    this.companyMinLengthError = page.getByText('Company name must be at least 2 characters');
   }
 
   async goto() {
@@ -133,6 +134,10 @@ export class OnboardingFormPage {
 
   async expectDateOfBirthTooOldError() {
     await expect(this.dateOfBirthTooOldError).toBeVisible();
+  }
+
+  async expectCompanyMinLengthError() {
+    await expect(this.companyMinLengthError).toBeVisible();
   }
 
 }
