@@ -35,6 +35,7 @@ export class OnboardingFormPage {
     this.emailRequiredError = page.getByText('Email is required');
     this.emailFormatError = page.getByText('Please enter a valid email address');
     this.phoneRequiredError = page.getByText('Phone number is required');
+    this.phoneFormatError = page.getByText('Please enter a valid Australian phone number');
     this.dateOfBirthRequiredError = page.getByText('Date of birth is required');
     this.stateRequiredError = page.getByText('Please select your state');
     this.genderRequiredError = page.getByText('Please select your gender');
@@ -112,5 +113,9 @@ export class OnboardingFormPage {
 
   async expectEmailFormatError() {
     await expect(this.emailFormatError).toBeVisible();
+  }
+
+  async expectPhoneFormatError() {
+    await expect(this.phoneFormatError).toBeVisible();
   }
 }

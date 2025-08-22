@@ -180,6 +180,24 @@ test.describe("Onboarding Form", () => {
         await onboardingForm.expectEmailFormatError()
       })
     })
+
+    test.describe("Phone Validation", () => {
+      const invalidPhoneNumbers = negativeTestData.invalidPhoneFormats.phoneNumbers
+
+      invalidPhoneNumbers.forEach((phoneNumber) => {
+        test(`should show format error for invalid phone: ${phoneNumber}`, async ({ page }) => {
+          // Fill form with invalid phone number
+          const testData = { ...negativeTestData.invalidPhoneFormats, phone: phoneNumber }
+          await onboardingForm.fillPersonalInfo(testData)
+          await onboardingForm.selectState(testData.state)
+          await onboardingForm.selectGender(testData.gender)
+          
+          // Submit form and verify phone format error
+          await onboardingForm.submitForm()
+          await onboardingForm.expectPhoneFormatError()
+        })
+      })
+    })
   })
 })
 
