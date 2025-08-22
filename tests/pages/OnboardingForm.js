@@ -26,6 +26,15 @@ export class OnboardingFormPage {
     // Label locators for visibility checks
     this.stateLabel = page.getByText('State *', { exact: true });
     this.genderLabel = page.getByText('Gender *', { exact: true });
+
+    // Error message locators
+    this.firstNameRequiredError = page.getByText('First name is required');
+    this.lastNameRequiredError = page.getByText('Last name is required');
+    this.emailRequiredError = page.getByText('Email is required');
+    this.phoneRequiredError = page.getByText('Phone number is required');
+    this.dateOfBirthRequiredError = page.getByText('Date of birth is required');
+    this.stateRequiredError = page.getByText('Please select your state');
+    this.genderRequiredError = page.getByText('Please select your gender');
   }
 
   async goto() {
@@ -73,5 +82,20 @@ export class OnboardingFormPage {
   async expectSuccessMessage() {
     await expect(this.successTitle).toBeVisible();
     await expect(this.successMessage).toBeVisible();
+  }
+
+  async expectFieldError(fieldName) {
+    const errorLocator = this[`${fieldName}RequiredError`];
+    await expect(errorLocator).toBeVisible();
+  }
+
+  async expectAllRequiredFieldErrors() {
+    await expect(this.firstNameRequiredError).toBeVisible();
+    await expect(this.lastNameRequiredError).toBeVisible();
+    await expect(this.emailRequiredError).toBeVisible();
+    await expect(this.phoneRequiredError).toBeVisible();
+    await expect(this.dateOfBirthRequiredError).toBeVisible();
+    await expect(this.stateRequiredError).toBeVisible();
+    await expect(this.genderRequiredError).toBeVisible();
   }
 }

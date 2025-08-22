@@ -1,6 +1,7 @@
-import { test, expect } from "@playwright/test"
+import { test } from "@playwright/test"
 import { OnboardingFormPage } from './pages/OnboardingForm.js'
 import testData from './data/testData.json'
+import negativeTestData from './data/negativeTestData.json'
 
 test.describe("Onboarding Form", () => {
   let onboardingForm
@@ -73,6 +74,73 @@ test.describe("Onboarding Form", () => {
         // Submit form and verify success without errors
         await onboardingForm.submitForm()
         await onboardingForm.expectSuccessMessage()
+      })
+    })
+  })
+
+  test.describe("Negative Scenarios", () => {
+    test.describe("Required Field Validations", () => {
+      test('should show error messages for empty form submission', async ({ page }) => {
+        // Leave all fields empty and submit
+        await onboardingForm.submitForm()
+        
+        // Verify error messages appear for all required fields
+        await onboardingForm.expectAllRequiredFieldErrors()
+      })
+
+      test('should show error for missing first name', async ({ page }) => {
+        // Fill all fields except first name
+        await onboardingForm.fillPersonalInfo(negativeTestData.missingFirstName)
+        await onboardingForm.selectState(negativeTestData.missingFirstName.state)
+        await onboardingForm.selectGender(negativeTestData.missingFirstName.gender)
+        
+        // Submit form and verify first name error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectFieldError('firstName')
+      })
+
+      test('should show error for missing last name', async ({ page }) => {
+        // Fill all fields except last name
+        await onboardingForm.fillPersonalInfo(negativeTestData.missingLastName)
+        await onboardingForm.selectState(negativeTestData.missingLastName.state)
+        await onboardingForm.selectGender(negativeTestData.missingLastName.gender)
+        
+        // Submit form and verify last name error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectFieldError('lastName')
+      })
+
+      test('should show error for missing email', async ({ page }) => {
+        // Fill all fields except email
+        await onboardingForm.fillPersonalInfo(negativeTestData.missingEmail)
+        await onboardingForm.selectState(negativeTestData.missingEmail.state)
+        await onboardingForm.selectGender(negativeTestData.missingEmail.gender)
+        
+        // Submit form and verify email error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectFieldError('email')
+      })
+
+      test('should show error for missing phone', async ({ page }) => {
+        // Fill all fields except phone
+        await onboardingForm.fillPersonalInfo(negativeTestData.missingPhone)
+        await onboardingForm.selectState(negativeTestData.missingPhone.state)
+        await onboardingForm.selectGender(negativeTestData.missingPhone.gender)
+        
+        // Submit form and verify phone error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectFieldError('phone')
+      })
+
+      test('should show error for missing date of birth', async ({ page }) => {
+        // Fill all fields except date of birth
+        await onboardingForm.fillPersonalInfo(negativeTestData.missingDateOfBirth)
+        await onboardingForm.selectState(negativeTestData.missingDateOfBirth.state)
+        await onboardingForm.selectGender(negativeTestData.missingDateOfBirth.gender)
+        
+        // Submit form and verify date of birth error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectFieldError('dateOfBirth')
       })
     })
   })

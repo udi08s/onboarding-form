@@ -1,0 +1,54 @@
+{
+  "emptyForm": {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "phone": "",
+    "dateOfBirth": ""
+  },
+  "missingFirstName": {
+    "firstName": "",
+    "lastName": "Doe",
+    "email": "john.doe@mail.com",
+    "phone": "+61412345678",
+    "dateOfBirth": "1990-01-15",
+    "state": "Victoria",
+    "gender": "Male"
+  },
+  "missingLastName": {
+    "firstName": "John",
+    "lastName": "",
+    "email": "john.doe@mail.com",
+    "phone": "+61412345678",
+    "dateOfBirth": "1990-01-15",
+    "state": "Victoria",
+    "gender": "Male"
+  },
+  "missingEmail": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "",
+    "phone": "+61412345678",
+    "dateOfBirth": "1990-01-15",
+    "state": "Victoria",
+    "gender": "Male"
+  },
+  "missingPhone": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@mail.com",
+    "phone": "",
+    "dateOfBirth": "1990-01-15",
+    "state": "Victoria",
+    "gender": "Male"
+  },
+  "missingDateOfBirth": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@mail.com",
+    "phone": "+61412345678",
+    "dateOfBirth": "",
+    "state": "Victoria",
+    "gender": "Male"
+  }
+}
