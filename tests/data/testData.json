@@ -41,7 +41,7 @@
   "dropdownOptions": {
     "states": [
       "New South Wales",
-      "Victoria", 
+      "Victoria",
       "Queensland",
       "Western Australia",
       "South Australia",
@@ -49,12 +49,6 @@
       "Australian Capital Territory",
       "Northern Territory"
     ],
-    "genders": [
-      "Male",
-      "Female",
-      "Non-binary",
-      "Prefer not to say",
-      "Other"
-    ]
+    "genders": ["Male", "Female", "Non-binary", "Prefer not to say", "Other"]
   }
 }
