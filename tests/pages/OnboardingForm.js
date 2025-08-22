@@ -37,6 +37,9 @@ export class OnboardingFormPage {
     this.phoneRequiredError = page.getByText('Phone number is required');
     this.phoneFormatError = page.getByText('Please enter a valid Australian phone number');
     this.dateOfBirthRequiredError = page.getByText('Date of birth is required');
+    this.dateOfBirthFutureError = page.getByText('Date of birth cannot be in the future');
+    this.dateOfBirthTooYoungError = page.getByText('You must be at least 13 years old');
+    this.dateOfBirthTooOldError = page.getByText('Please enter a valid date of birth');
     this.stateRequiredError = page.getByText('Please select your state');
     this.genderRequiredError = page.getByText('Please select your gender');
   }
@@ -117,5 +120,17 @@ export class OnboardingFormPage {
 
   async expectPhoneFormatError() {
     await expect(this.phoneFormatError).toBeVisible();
+  }
+
+  async expectDateOfBirthFutureError() {
+    await expect(this.dateOfBirthFutureError).toBeVisible();
+  }
+
+  async expectDateOfBirthTooYoungError() {
+    await expect(this.dateOfBirthTooYoungError).toBeVisible();
+  }
+
+  async expectDateOfBirthTooOldError() {
+    await expect(this.dateOfBirthTooOldError).toBeVisible();
   }
 }

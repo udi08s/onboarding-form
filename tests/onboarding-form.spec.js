@@ -198,6 +198,41 @@ test.describe("Onboarding Form", () => {
         })
       })
     })
+
+    test.describe("Date of Birth Validation", () => {
+      test('should show error for future date of birth', async ({ page }) => {
+        // Fill form with future date of birth
+        await onboardingForm.fillPersonalInfo(negativeTestData.futureDateOfBirth)
+        await onboardingForm.selectState(negativeTestData.futureDateOfBirth.state)
+        await onboardingForm.selectGender(negativeTestData.futureDateOfBirth.gender)
+        
+        // Submit form and verify future date error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectDateOfBirthFutureError()
+      })
+
+      test('should show error for too young age (under 13)', async ({ page }) => {
+        // Fill form with date making user under 13 years old
+        await onboardingForm.fillPersonalInfo(negativeTestData.tooYoungDateOfBirth)
+        await onboardingForm.selectState(negativeTestData.tooYoungDateOfBirth.state)
+        await onboardingForm.selectGender(negativeTestData.tooYoungDateOfBirth.gender)
+        
+        // Submit form and verify too young error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectDateOfBirthTooYoungError()
+      })
+
+      test('should show error for too old age (over 120)', async ({ page }) => {
+        // Fill form with date making user over 120 years old
+        await onboardingForm.fillPersonalInfo(negativeTestData.tooOldDateOfBirth)
+        await onboardingForm.selectState(negativeTestData.tooOldDateOfBirth.state)
+        await onboardingForm.selectGender(negativeTestData.tooOldDateOfBirth.gender)
+        
+        // Submit form and verify too old error
+        await onboardingForm.submitForm()
+        await onboardingForm.expectDateOfBirthTooOldError()
+      })
+    })
   })
 })
 
