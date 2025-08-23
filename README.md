@@ -61,6 +61,39 @@ npx playwright test
 npx playwright show-report
 ```
 
+## Test Implementation
+
+### Architecture & Approach
+
+This test suite follows best practices to ensure reliability and maintainability:
+
+* **Page Object Model** - Encapsulates form interactions in `OnboardingForm.js` with stable locators using `getByLabel` and `getByRole`
+* **Data-driven testing** - Centralised test data in JSON files separating valid and invalid scenarios
+* **Nested test organisation** - Logical grouping using `describe` blocks for positive/negative scenarios and specific validation areas
+* **Parameterised testing** - Efficient validation of multiple invalid inputs (phone formats, email patterns)
+
+### Test Coverage
+
+The implementation addresses all requirements from the task section:
+
+**Positive Scenarios:**
+* Complete form submission with all required fields
+* Optional company field inclusion
+* Boundary value testing for minimum valid inputs (2-character names, 13-year-old dates)
+
+**Negative Scenarios:**
+* Required field validation - empty submissions trigger proper error messages
+* Format validation - invalid email patterns and phone number formats
+* Length constraints - single character names and company fields under minimum
+* Date restrictions - future dates and age limits (under 13, over 120)
+* Dropdown validation - ensures all state and gender options are available
+
+**Reliability Features:**
+* Stable locators preventing test flakiness
+* Comprehensive error message validation
+
+Each validation rule specified in the form requirements has corresponding positive and negative test cases, ensuring thorough coverage of both happy path and edge case scenarios.
+
 ---
 
 ## Project Structure
@@ -69,7 +102,12 @@ npx playwright show-report
 ├── app/                     # Next.js app code
 ├── components/              # Shared UI components
 ├── tests/
-│   └── onboarding-form.spec.js   # Your Playwright test file
+│   ├── data/
+│   │   ├── testData.json           # Valid test data
+│   │   └── negativeTestData.json   # Invalid test scenarios
+│   ├── pages/
+│   │   └── OnboardingForm.js       # Page Object Model
+│   └── onboarding-form.spec.js     # Main test suite
 ├── package.json
 ├── playwright.config.js
 └── README.md
